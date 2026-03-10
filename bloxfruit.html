@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop Acc Blox Fruits - ShopRobloxS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --red:#e63946;--dark-red:#c1121f;--yellow:#ffd60a;
+      --bg:#f0f4ff;--card:#fff;--nav:#1a1a2e;
+    }
+    body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;}
+
+    .float-item{position:fixed;pointer-events:none;z-index:0;animation:floatAnim 6s ease-in-out infinite;opacity:0.15;}
+    .float-item:nth-child(1){top:10%;left:5%;font-size:2rem;animation-delay:0s;}
+    .float-item:nth-child(2){top:40%;right:4%;font-size:1.8rem;animation-delay:2s;}
+    .float-item:nth-child(3){top:75%;left:3%;font-size:1.5rem;animation-delay:1s;}
+    @keyframes floatAnim{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-16px) rotate(8deg);}}
+
+    /* NAV */
+    nav{background:var(--nav);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+    .logo{font-family:'Bangers',cursive;font-size:1.9rem;color:var(--yellow);letter-spacing:2px;text-shadow:2px 2px 0 var(--red);text-decoration:none;}
+    .logo span{color:var(--red);}
+    .nav-home{background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;padding:6px 10px;border-radius:8px;transition:background 0.2s;}
+    .nav-home:hover{background:rgba(255,255,255,0.1);}
+    .nav-btns{display:flex;gap:0.7rem;}
+    .btn-nav{background:var(--red);color:white;border:none;padding:8px 18px;border-radius:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:background 0.2s,transform 0.1s;}
+    .btn-nav:hover{background:var(--dark-red);transform:translateY(-1px);}
+    .btn-dk{background:#e63946;}.btn-dn{background:#c1121f;}
+
+    /* MAIN */
+    main{max-width:1200px;margin:0 auto;padding:1.5rem;position:relative;z-index:1;}
+
+    /* SEARCH BAR */
+    .search-bar{
+      display:flex;align-items:center;gap:0.6rem;
+      background:white;border-radius:10px;padding:0.5rem 1rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08);
+      width:fit-content;margin-bottom:1rem;
+    }
+    .search-bar input{border:none;outline:none;font-family:'Nunito',sans-serif;font-size:0.95rem;width:220px;}
+    .search-bar span{font-size:1.1rem;}
+
+    /* BREADCRUMB */
+    .breadcrumb{font-size:0.82rem;color:#666;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.4rem;}
+    .breadcrumb a{color:var(--red);text-decoration:none;font-weight:600;}
+    .breadcrumb a:hover{text-decoration:underline;}
+
+    /* PAGE TITLE */
+    .page-title{font-family:'Bangers',cursive;font-size:2rem;color:var(--nav);letter-spacing:2px;text-align:center;margin-bottom:1.8rem;text-shadow:1px 1px 0 rgba(0,0,0,0.1);}
+
+    /* ACC GRID */
+    .acc-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:1.4rem;
+    }
+
+    .acc-card{
+      background:var(--card);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 4px 16px rgba(0,0,0,0.1);
+      transition:transform 0.22s,box-shadow 0.22s;
+      position:relative;
+    }
+    .acc-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(230,57,70,0.2);}
+
+    .acc-thumb{
+      width:100%;aspect-ratio:16/9;
+      object-fit:cover;
+      display:block;
+    }
+    .acc-thumb-placeholder{
+      width:100%;aspect-ratio:16/9;
+      background:linear-gradient(135deg,#0a3d62 0%,#e63946 100%);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Bangers',cursive;font-size:1.5rem;color:var(--yellow);
+      text-align:center;letter-spacing:1px;text-shadow:2px 2px 0 #000;padding:1rem;
+    }
+
+    .acc-body{padding:1rem;}
+    .acc-name{font-weight:800;font-size:0.9rem;color:#1a1a2e;margin-bottom:0.8rem;line-height:1.4;}
+
+    .acc-stats{margin-bottom:0.8rem;}
+    .acc-stat-row{
+      display:flex;justify-content:space-between;align-items:center;
+      font-size:0.8rem;color:#555;padding:3px 0;
+      border-bottom:1px dashed #eee;
+    }
+    .acc-stat-row:last-child{border-bottom:none;}
+    .acc-stat-label{font-weight:600;}
+    .acc-stat-val{color:#1a1a2e;font-weight:700;}
+
+    .acc-footer{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-top:0.8rem;padding-top:0.8rem;
+      border-top:2px solid #f0f0f0;
+    }
+    .acc-price{
+      display:flex;align-items:center;gap:0.3rem;
+      font-weight:800;font-size:1rem;color:var(--red);
+    }
+    .acc-price .coin{font-size:1rem;}
+    .btn-buy{
+      background:var(--red);color:white;
+      border:none;padding:8px 16px;border-radius:8px;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:0.85rem;
+      cursor:pointer;display:flex;align-items:center;gap:0.4rem;
+      transition:background 0.2s,transform 0.1s;
+    }
+    .btn-buy:hover{background:var(--dark-red);transform:scale(1.04);}
+
+    /* SOLD badge */
+    .badge-sold{
+      position:absolute;top:10px;right:10px;
+      background:#333;color:white;
+      font-size:0.65rem;font-weight:800;padding:3px 10px;
+      border-radius:20px;letter-spacing:1px;
+    }
+    .badge-new{background:var(--red);}
+
+    /* ======= ADMIN PANEL ======= */
+    .admin-toggle{
+      position:fixed;bottom:2rem;right:2rem;
+      background:var(--nav);color:var(--yellow);
+      border:none;border-radius:50%;width:54px;height:54px;
+      font-size:1.4rem;cursor:pointer;z-index:200;
+      box-shadow:0 4px 16px rgba(0,0,0,0.3);
+      transition:transform 0.2s;
+    }
+    .admin-toggle:hover{transform:scale(1.1) rotate(20deg);}
+
+    .admin-panel{
+      display:none;
+      position:fixed;bottom:6rem;right:2rem;
+      background:white;border-radius:16px;
+      padding:1.5rem;width:340px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.2);
+      z-index:200;
+      border:2px solid var(--red);
+    }
+    .admin-panel.open{display:block;}
+    .admin-panel h3{font-size:1rem;font-weight:800;color:var(--nav);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+
+    .form-group{margin-bottom:0.9rem;}
+    .form-group label{display:block;font-size:0.78rem;font-weight:700;color:#555;margin-bottom:0.3rem;}
+    .form-group input,.form-group textarea{
+      width:100%;border:1.5px solid #e0e0e0;border-radius:8px;
+      padding:0.5rem 0.7rem;font-family:'Nunito',sans-serif;font-size:0.85rem;
+      outline:none;transition:border-color 0.2s;
+    }
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--red);}
+    .form-group textarea{resize:vertical;min-height:60px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+
+    .btn-addacc{
+      width:100%;background:var(--red);color:white;
+      border:none;border-radius:10px;padding:0.7rem;
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;
+      cursor:pointer;transition:background 0.2s;margin-top:0.3rem;
+    }
+    .btn-addacc:hover{background:var(--dark-red);}
+
+    /* Empty state */
+    .empty-state{
+      grid-column:1/-1;text-align:center;padding:4rem 2rem;
+      color:#aaa;
+    }
+    .empty-state .icon{font-size:3rem;margin-bottom:1rem;display:block;}
+    .empty-state p{font-size:0.95rem;}
+
+    /* TOAST */
+    .toast{
+      position:fixed;top:80px;right:2rem;
+      background:#2d6a4f;color:white;
+      padding:0.8rem 1.4rem;border-radius:10px;
+      font-weight:700;font-size:0.9rem;
+      z-index:999;opacity:0;transform:translateY(-10px);
+      transition:opacity 0.3s,transform 0.3s;
+      pointer-events:none;
+    }
+    .toast.show{opacity:1;transform:translateY(0);}
+
+    footer{text-align:center;padding:2rem;color:#888;font-size:0.8rem;margin-top:3rem;}
+  </style>
+</head>
+<body>
+
+  <div class="float-item">⚔️</div>
+  <div class="float-item">🍎</div>
+  <div class="float-item">💎</div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="index.html">Shop<span>Roblox</span>S</a>
+    <button class="nav-home" onclick="location.href='index.html'">🏠</button>
+    <div class="nav-btns">
+      <button class="btn-nav">Nạp tiền</button>
+      <button class="btn-nav btn-dk">Đăng ký</button>
+      <button class="btn-nav btn-dn">Đăng nhập</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <!-- Search -->
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Tìm kiếm acc..." id="searchInput" oninput="filterAcc()"/>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span>🏠</span>
+      <a href="index.html">Trang chủ</a>
+      <span>›</span>
+      <span>🎮 Shop acc Blox Fruits</span>
+    </div>
+
+    <h1 class="page-title">⚔️ Shop acc Blox Fruits</h1>
+
+    <!-- ACC GRID -->
+    <div class="acc-grid" id="accGrid">
+      <div class="empty-state">
+        <span class="icon">📦</span>
+        <p>Chưa có acc nào. Bấm nút ⚙️ bên dưới để thêm acc!</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2025 ShopRobloxS — Shop acc Roblox uy tín</footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">✅ Đã thêm acc thành công!</div>
+
+  <!-- ADMIN BUTTON -->
+  <button class="admin-toggle" onclick="togglePanel()" title="Thêm acc">⚙️</button>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin-panel" id="adminPanel">
+    <h3>➕ Thêm Acc Blox Fruit</h3>
+
+    <div class="form-group">
+      <label>Tên acc / Mô tả ngắn *</label>
+      <input type="text" id="accName" placeholder="VD: Acc level 2800 có Haki Bá Vương..."/>
+    </div>
+
+    <div class="form-group">
+      <label>Link ảnh (để trống nếu không có)</label>
+      <input type="text" id="accImg" placeholder="https://... hoặc để trống"/>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>💰 Giá (VNĐ) *</label>
+        <input type="number" id="accPrice" placeholder="VD: 150000"/>
+      </div>
+      <div class="form-group">
+        <label>Level</label>
+        <input type="number" id="accLevel" placeholder="VD: 2800"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>$ Beli</label>
+        <input type="text" id="accBeli" placeholder="VD: 22,000,000"/>
+      </div>
+      <div class="form-group">
+        <label>F - Fragments</label>
+        <input type="text" id="accFrag" placeholder="VD: 15,000"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Mô tả thêm (trái quỷ, vũ khí...)</label>
+      <textarea id="accDesc" placeholder="VD: Có Hải Quân V2, Kiếm Yama, Vật phẩm hiếm..."></textarea>
+    </div>
+
+    <button class="btn-addacc" onclick="addAcc()">➕ Thêm vào shop</button>
+  </div>
+
+  <script>
+    // Lưu acc vào localStorage để không mất khi tải lại
+    let accList = JSON.parse(localStorage.getItem('bloxfruit_accs') || '[]');
+
+    function saveData(){ localStorage.setItem('bloxfruit_accs', JSON.stringify(accList)); }
+
+    function togglePanel(){
+      document.getElementById('adminPanel').classList.toggle('open');
+    }
+
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 2800);
+    }
+
+    function formatPrice(n){
+      return Number(n).toLocaleString('vi-VN') + 'đ';
+    }
+
+    function renderGrid(list){
+      const grid = document.getElementById('accGrid');
+      if(!list.length){
+        grid.innerHTML = `<div class="empty-state"><span class="icon">📦</span><p>Chưa có acc nào. Bấm nút ⚙️ bên dưới để thêm acc!</p></div>`;
+        return;
+      }
+      grid.innerHTML = list.map((acc, idx) => `
+        <div class="acc-card" id="card-${idx}">
+          <span class="badge-sold badge-new">🆕 Mới</span>
+          ${acc.img
+            ? `<img class="acc-thumb" src="${acc.img}" alt="${acc.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="acc-thumb-placeholder" style="display:none">BLOX FRUIT</div>`
+            : `<div class="acc-thumb-placeholder">BLOX<br>FRUIT</div>`
+          }
+          <div class="acc-body">
+            <div class="acc-name">${acc.name}</div>
+            <div class="acc-stats">
+              ${acc.level ? `<div class="acc-stat-row"><span class="acc-stat-label">⚡ Level</span><span class="acc-stat-val">${acc.level}</span></div>` : ''}
+              ${acc.beli  ? `<div class="acc-stat-row"><span class="acc-stat-label">💰 Beli</span><span class="acc-stat-val">${acc.beli}</span></div>` : ''}
+              ${acc.frag  ? `<div class="acc-stat-row"><span class="acc-stat-label">🔮 Fragments</span><span class="acc-stat-val">${acc.frag}</span></div>` : ''}
+              ${acc.desc  ? `<div class="acc-stat-row"><span class="acc-stat-label">📋 Chi tiết</span><span class="acc-stat-val" style="font-size:0.75rem;text-align:right;max-width:130px">${acc.desc}</span></div>` : ''}
+            </div>
+            <div class="acc-footer">
+              <div class="acc-price"><span class="coin">🪙</span>${formatPrice(acc.price)}</div>
+              <button class="btn-buy" onclick="buyAcc(${idx})">🛒 Mua</button>
+            </div>
+            <button onclick="deleteAcc(${idx})" style="width:100%;margin-top:0.5rem;background:none;border:1px dashed #ddd;border-radius:6px;padding:4px;font-size:0.72rem;color:#bbb;cursor:pointer;" onmouseover="this.style.color='#e63946';this.style.borderColor='#e63946'" onmouseout="this.style.color='#bbb';this.style.borderColor='#ddd'">🗑️ Xoá acc này</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addAcc(){
+      const name  = document.getElementById('accName').value.trim();
+      const price = document.getElementById('accPrice').value.trim();
+      if(!name || !price){ alert('Vui lòng nhập Tên acc và Giá!'); return; }
+
+      accList.unshift({
+        name,
+        price,
+        img:   document.getElementById('accImg').value.trim(),
+        level: document.getElementById('accLevel').value.trim(),
+        beli:  document.getElementById('accBeli').value.trim(),
+        frag:  document.getElementById('accFrag').value.trim(),
+        desc:  document.getElementById('accDesc').value.trim(),
+      });
+
+      saveData();
+      renderGrid(accList);
+
+      // Reset form
+      ['accName','accImg','accPrice','accLevel','accBeli','accFrag','accDesc']
+        .forEach(id => document.getElementById(id).value = '');
+
+      document.getElementById('adminPanel').classList.remove('open');
+      showToast('✅ Đã thêm acc thành công!');
+    }
+
+    function deleteAcc(idx){
+      if(!confirm('Xoá acc này khỏi shop?')) return;
+      accList.splice(idx, 1);
+      saveData();
+      renderGrid(accList);
+      showToast('🗑️ Đã xoá acc!');
+    }
+
+    function buyAcc(idx){
+      alert('💬 Liên hệ admin để mua acc này!\nZalo: 0xxxxxxxxx');
+    }
+
+    function filterAcc(){
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = accList.filter(a =>
+        a.name.toLowerCase().includes(q) ||
+        (a.desc && a.desc.toLowerCase().includes(q))
+      );
+      renderGrid(filtered);
+    }
+
+    // Load data khi mở trang
+    renderGrid(accList);
+  </script>
+</body>
+</html>
